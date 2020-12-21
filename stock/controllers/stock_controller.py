@@ -2,6 +2,7 @@ from flask import request, jsonify
 from stock.services.stock_service import get_quantity, insert_product, update_product
 from flask_restful import Resource
 from stock import app, api
+from random import randrange
 import json
 
 
