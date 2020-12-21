@@ -1,4 +1,5 @@
 from stock.models.stock_model import Stock
+import json
 
 
 def get_quantity(_id):
@@ -12,4 +13,7 @@ def insert_product(body: dict):
 
 
 def update_product(quantity, _id):
-    Stock.objects.get(id=_id).update(quantity=quantity)
+    product = get_quantity(_id)
+    product = json.loads(product.to_json())
+    qty = product['quantity'] - int(quantity)
+    Stock.objects.get(product_id=_id).update(quantity=qty)
