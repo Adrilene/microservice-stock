@@ -2,14 +2,18 @@ from flask import request, jsonify
 from stock.services.stock_service import get_quantity, insert_product
 from flask_restful import Resource
 from stock import app, api
+from random import randrange
 import json
 
 
 class StockQuantityController(Resource):
     def get(self, _id):
         product = get_quantity(_id)
-        product = json.loads(product.to_json())
-        return{"quantity": product["quantity"]}, 200
+        if product:
+            product = json.loads(product.to_json())
+            return {"quantity": product["quantity"]}, 200
+
+        return {"quantity": randrange(9)}, 200
 
 
 class StockController(Resource):
