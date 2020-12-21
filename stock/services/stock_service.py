@@ -9,3 +9,7 @@ def insert_product(body: dict):
     product = Stock(**body)
     product.save()
     return str(product.id)
+
+
+def update_product(quantity, _id):
+    Stock.objects.get(id=_id).update(quantity=quantity)
